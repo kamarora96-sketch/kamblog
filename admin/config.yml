@@ -1,0 +1,30 @@
+backend:
+  name: git-gateway
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        pattern: ['.{1,100}', "Keep titles under 100 characters"]
+      - label: "Subtitle"
+        name: "subtitle"
+        widget: "string"
+        required: false
+        pattern: ['.{0,200}', "Keep subtitles under 200 characters"]
+      - label: "Publish Date"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        time_zone: false
+      - label: "Body"
+        name: "body"
+        widget: "markdown"

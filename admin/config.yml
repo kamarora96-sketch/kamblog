@@ -1,8 +1,10 @@
+yaml
 backend:
   name: git-gateway
+  branch: main
 
-media_folder: "public/images"
-public_folder: "/images"
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "posts"
@@ -11,20 +13,9 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - label: "Title"
-        name: "title"
-        widget: "string"
-        pattern: ['.{1,100}', "Keep titles under 100 characters"]
-      - label: "Subtitle"
-        name: "subtitle"
-        widget: "string"
-        required: false
-        pattern: ['.{0,200}', "Keep subtitles under 200 characters"]
-      - label: "Publish Date"
-        name: "date"
-        widget: "datetime"
-        format: "YYYY-MM-DD"
-        time_zone: false
-      - label: "Body"
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
         name: "body"
         widget: "markdown"

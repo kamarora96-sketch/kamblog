@@ -8,5 +8,26 @@
 <body>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var checkIdentity = setInterval(function() {
+        if (window.netlifyIdentity) {
+          clearInterval(checkIdentity);
+          
+          // Check for invite or recovery token and open widget
+          var hash = window.location.hash;
+          if (hash && (hash.indexOf('invite_token') !== -1 || hash.indexOf('recovery_token') !== -1)) {
+            window.netlifyIdentity.open();
+          }
+          
+          // Handle login
+          window.netlifyIdentity.on('login', function(user) {
+            document.location.href = '/admin/';
+          });
+        }
+      }, 100);
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,47 @@
+---
+layout: layout.njk
+title: "Notes & Musings"
+---
+
+<section id="vb-b1g-blog" class="vb-b1g" data-section-name="Personal blog" aria-labelledby="vb-b1g-heading">
+  <div class="vb-b1g__container">
+    <header class="vb-b1g__header">
+      <div class="vb-b1g__brand">
+        <p class="vb-b1g__eyebrow">A simple blog</p>
+        <h1 class="vb-b1g__title" id="vb-b1g-heading">Notes &amp; Musings</h1>
+        <p class="vb-b1g__lede">Short thoughts on learning, building, and figuring things out.</p>
+      </div>
+      <a class="vb-b1g__admin-link" href="/admin">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+        </svg>
+        Write a post
+      </a>
+    </header>
+
+    <div class="vb-b1g__list">
+      {%- set sortedPosts = collections.posts | sort(attribute='date') | reverse %}
+      {%- for post in sortedPosts %}
+      <article class="vb-b1g__post">
+        <div class="vb-b1g__post-meta">
+          <time class="vb-b1g__post-date" datetime="{{ post.date | dateISO }}">
+            {{ post.date | dateFormat }}
+          </time>
+        </div>
+        <h2 class="vb-b1g__post-title">{{ post.data.title }}</h2>
+        {%- if post.data.subtitle %}
+        <p class="vb-b1g__post-subtitle">{{ post.data.subtitle }}</p>
+        {%- endif %}
+        <div class="vb-b1g__post-body">
+          {{ post.templateContent | safe }}
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+
+    {%- if collections.posts.length == 0 %}
+    <p class="vb-b1g__empty">No posts yet. <a href="/admin">Write your first post</a> in the admin panel.</p>
+    {%- endif %}
+  </div>
+</section>
